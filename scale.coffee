@@ -45,7 +45,8 @@ notes_for_value = (val) ->
 	(name for name, v of NOTES when v == val)
 
 
-# scale('A#', '2212221')
+# Produces the notes of the scale for a given key and mode:
+# scale('C', '2212221') => CDEFGA
 scale = (key, mode) ->
 	prev_step = 0
 	steps = mode.split('').map (tone) -> prev_step += parseInt(tone, 10)
