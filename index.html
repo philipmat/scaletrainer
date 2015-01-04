@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Scale Trainer</title>
+	<link rel="shortcut icon" type="image/x-icon" href="favicon.png" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+	<h1>Scale Trainer</h1>
+	<hr/>
+	<div>
+		<form method="GET" action="scale.html">
+			<!-- div>label[for=notes]{notes}+select#notes[name=notes]>option{Major}*7 -->
+			<div>
+				<label for="instrument">instrument</label>
+				<select id="instrument" name="instrument">
+					<option value="guitar">Guitar EADGBE</option>
+					<option value="">Guitar BEADGBE</option>
+					<option value="">Bass EADG</option>
+					<option value="">88-keys Piano</option>
+				</select>
+			</div>
+			<div>
+				<label for="mode">Mode</label>
+				<select id="mode" name="mode">
+					<option value="2212221">Major/Ionian</option>
+					<option value="2122122">Natural minor/Aeolian</option>
+					<option value="22323">Pentatonic major</option>
+					<option value="32232">Pentatonic minor</option>
+					<option value="321132">Blues</option>
+					<option value="2122131">Harmonic minor</option>
+					<option value="2122221">Melodic minor</option>
+					<option value="2122212">Dorian</option>
+					<option value="1222122">Phrygian</option>
+					<option value="2221221">Lydian</option>
+					<option value="2212212">Mixolydian</option>
+					<option value="1221222">Locrian</option>
+				</select>
+			</div>
+			<div>
+				<label for="key">Key</label>
+				<select id="key" name="key">
+					<option value="0">A</option>
+					<option value="1">A# Bb</option>
+					<option value="2">B</option>
+					<option value="3">C</option>
+					<option value="4">C# Db</option>
+					<option value="5">D</option>
+					<option value="6">D# Eb</option>
+					<option value="7">E</option>
+					<option value="8">F</option>
+					<option value="9">F# Gb</option>
+					<option value="10">G</option>
+					<option value="11">G# Ab</option>
+				</select>
+			</div>
+			<div>
+				<label for="measures">Measures</label>
+				<select id="measures" name="measures">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+				</select>
+			</div>
+			<div>
+				<label for="time">in time</label>
+				<select id="time" name="time">
+					<option value="4/4">4/4</option>
+					<!--
+					<option value="">2/4</option>
+					<option value="">3/4</option>
+					<option value="">7/8</option>
+					-->
+				</select>
+			</div>
+			<div>
+				<label for="bpm">bpm</label>
+				<select id="bpm" name="bpm">
+					<option value="30">30 bmp</option>
+					<option value="40">40 bmp</option>
+					<option value="50">50 bmp</option>
+					<option value="60">60 bmp</option>
+					<option value="70">70 bmp</option>
+					<option value="80">80 bmp</option>
+					<option value="90">90 bmp</option>
+					<option value="100">100 bmp</option>
+					<option value="110">110 bmp</option>
+					<option value="120">120 bmp</option>
+					<option value="130">130 bmp</option>
+					<option value="140">140 bmp</option>
+					<option value="150">150 bmp</option>
+				</select>
+			</div>
+			<div>
+				<label for="randomness">Notes</label>
+				<select id="randomness" name="randomness">
+					<option value="all">All random</option>
+					<option value="random-first">Random first afterwards sequantial</option>
+					<option value="random-close">Random close</option>
+					<option value="random-loose">Random loose</option>
+					<option value="random-song-measure">Random song measures</option>
+					<option value="random-song">Random song start</option>
+				</select>
+			</div>
+			<div>
+				<label for="autoadvance">
+					<input id="autoadvance" type="checkbox" name="autoadvance" /> Auto-advance when measure is done counting
+				</label>
+			</div>
+			
+		</form>
+	</div>
+</body>
+</html>
