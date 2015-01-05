@@ -148,15 +148,6 @@ instrument_scale = (instrument, scale) ->
 	return all_notes
 
 
-
-	# handle the case where the first note of the instrument is above last of scale
-	# eg last note D, instrument starting at D#.
-	
-
-
-
-
-
 # Given a random mode, a scale, a time, and and instrument it produces
 # a measure of random notes
 
