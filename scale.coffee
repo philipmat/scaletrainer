@@ -151,10 +151,53 @@ instrument_scale = (instrument, scale) ->
 # Given a random mode, a scale, a time, and and instrument it produces
 # a measure of random notes
 
+random_max = (instrument_scale, number_of_notes) ->
+	range = instrument_scale.length - 1
+	notes = []
+	for x in [1..number_of_notes]
+		rnd = random 0, range
+		notes.push instrument_scale[rnd]
 
+	return notes
+
+random_first = (instrument_scale, number_of_notes) ->
+	range = instrument_scale.length - 1
+	first = random 0, range - number_of_notes
+	notes = []
+
+	for x in [0...number_of_notes]
+		notes.push instrument_scale[first + x]
+
+	return notes
+
+
+random_one_octave = (instrument_scale, number_of_notes, notes_range = 8) ->
+	range = instrument_scale.length - 1
+	root_pos = random 0, range
+	console.log "root = #{ root_pos } / #{ range }"
+	[min, max] = [Math.max(root_pos - notes_range, 0), Math.min(root_pos + notes_range, range)]
+
+	console.log "#{ min } - #{ max }"
+	notes = [instrument_scale[root_pos]]
+	for x in [2..number_of_notes]
+		rnd = random min, max
+		note = instrument_scale[rnd]
+		console.log "#{ rnd }: ", note
+		notes.push note
+
+	return notes
+
+
+random_two_octaves = (instrument_scale, number_of_notes) ->
+	return random_one_octave instrument_scale, number_of_notes, 16
 
 
 exports?.scale = scale
+exports?.bpm_to_ms = bpm_to_ms
 exports?.instrument_scale = instrument_scale
 exports?.INSTRUMENTS = INSTRUMENTS
+exports?.random_notes = random_max
+exports?.random_first = random_first
+exports?.random_one_octave = random_one_octave
+exports?.random_two_octaves = random_two_octaves
 
