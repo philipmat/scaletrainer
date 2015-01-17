@@ -200,4 +200,7 @@ exports?.random_notes = random_max
 exports?.random_first = random_first
 exports?.random_one_octave = random_one_octave
 exports?.random_two_octaves = random_two_octaves
-
+exports?.print_note = (n) ->
+	n['note'] + n['octave']
+exports?.print_note_html = (n) ->
+	"<span class='octave-note'><span class='note'>#{ n['note'] }</span><span class='octave'>#{ n['octave'] }</span></span>"
