@@ -5,6 +5,9 @@
 	<title>Scale Trainer</title>
 	<link rel="shortcut icon" type="image/x-icon" href="favicon.png" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<!--script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.1.0/knockout-min.js"></script-->
+	<script type="text/javascript" src="lib/knockout-3.2.0.js"></script>
+	<script type="text/javascript" src="main.js"></script>
 </head>
 <body>
 	<h1>Scale Trainer</h1>
@@ -13,8 +16,8 @@
 		<form method="GET" action="scale.html">
 			<!-- div>label[for=notes]{notes}+select#notes[name=notes]>option{Major}*7 -->
 			<div>
-				<label for="instrument">instrument</label>
-				<select id="instrument" name="instrument">
+				<label for="instrument">Instrument</label>
+				<select id="instrument" name="instrument" data-bind="options: instruments, value: instrument">
 					<option value="guitar">Guitar EADGBE</option>
 					<option value="">Guitar BEADGBE</option>
 					<option value="">Bass EADG</option>
@@ -23,7 +26,8 @@
 			</div>
 			<div>
 				<label for="mode">Mode</label>
-				<select id="mode" name="mode">
+				<select id="mode" name="mode"
+					data-bind="options: modes, optionsValue: key, optionsText: value, value: mode">
 					<option value="2212221">Major/Ionian</option>
 					<option value="2122122">Natural minor/Aeolian</option>
 					<option value="22323">Pentatonic major</option>
@@ -40,7 +44,8 @@
 			</div>
 			<div>
 				<label for="key">Key</label>
-				<select id="key" name="key">
+				<select id="key" name="key"
+					data-bind="options: keys, value: key">
 					<option value="0">A</option>
 					<option value="1">A# Bb</option>
 					<option value="2">B</option>
@@ -57,7 +62,8 @@
 			</div>
 			<div>
 				<label for="measures">Measures</label>
-				<select id="measures" name="measures">
+				<select id="measures" name="measures"
+					data-bind="options: measures, value: measure">
 					<option value="1">1</option>
 					<option value="2">2</option>
 					<option value="3">3</option>
@@ -66,7 +72,8 @@
 			</div>
 			<div>
 				<label for="time">in time</label>
-				<select id="time" name="time">
+				<select id="time" name="time"
+					data-bind="options: times, value: time">
 					<option value="4/4">4/4</option>
 					<!--
 					<option value="">2/4</option>
@@ -77,7 +84,8 @@
 			</div>
 			<div>
 				<label for="bpm">bpm</label>
-				<select id="bpm" name="bpm">
+				<select id="bpm" name="bpm"
+					data-bind="options: bpms, optionsValue: key, optionsText: value, value: bpm">
 					<option value="30">30 bmp</option>
 					<option value="40">40 bmp</option>
 					<option value="50">50 bmp</option>
@@ -95,7 +103,8 @@
 			</div>
 			<div>
 				<label for="randomness">Notes</label>
-				<select id="randomness" name="randomness">
+				<select id="randomness" name="randomness"
+					data-bind="options: random_modes, optionsValue: name, optionsText: desc, value: random_mode">
 					<option value="all">All random</option>
 					<option value="random-first">Random first afterwards sequantial</option>
 					<option value="random-close">Random close</option>
@@ -111,8 +120,11 @@
 					<input id="autoadvance" type="checkbox" name="autoadvance" /> Auto-advance when measure is done counting
 				</label>
 			</div>
-			
+			<button data-bind="click: go">Start!</button>
 		</form>
 	</div>
+<script type="text/javascript" src="scale.coffee"></script>
+<script type="text/javascript" src="index.coffee"></script>
+<script type="text/javascript" src="https://rawgit.com/jashkenas/coffeescript/master/extras/coffee-script.js"></script>
 </body>
 </html>

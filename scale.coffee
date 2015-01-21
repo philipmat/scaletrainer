@@ -1,4 +1,4 @@
-((module)->
+((module) ->
 	NOTES = 
 		'C' : 0
 		'C#': 1
@@ -52,7 +52,9 @@
 		'Piano (88 keys)': # A0 - C8
 			range: [ 9, 0, 0, 8 ]
 		# 7 string guitar BEADGBE B1 - D6
-		# Bass EADG E1 - 
+		# Bass EADG E1 - G4
+		'Bass EADG':
+			range: [ 4, 1, 7, 4 ]
 
 	TIME = 
 		4: '4/4'
@@ -197,6 +199,8 @@
 	module?.bpm_to_ms = bpm_to_ms
 	module?.instrument_scale = instrument_scale
 	module?.INSTRUMENTS = INSTRUMENTS
+	module?.MODES = MODES
+	module?.NOTES = NOTES
 	module?.random_notes = random_max
 	module?.random_first = random_first
 	module?.random_one_octave = random_one_octave
