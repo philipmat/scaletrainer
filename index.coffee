@@ -24,7 +24,6 @@
 		random_mode: ko.observable()
 		auto_advance: ko.observable true
 		go: ->
-			# keys = ['mode', 'key', 'measure', 'time', 'bpm', 'random_mode', 'auto_advance']
 			keys = (k for k of model when ko.isObservable model[k])
 			console.log keys
 			dict = ""
