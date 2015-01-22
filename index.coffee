@@ -13,7 +13,7 @@
 		measure: ko.observable()
 		times: ['4/4']
 		time: ko.observable()
-		bpms: ({key: x * 10, name: "#{ x * 10 } bpm"} for x in [3..15])
+		bpms: ({key: x * 10, name: "#{ x * 10 } bpm"} for x in [30..150] by 10)
 		bpm: ko.observable()
 		random_modes: [ 
 			{ name: 'random_first', desc: 'Random first, afterwards sequential' }
@@ -24,7 +24,9 @@
 		random_mode: ko.observable()
 		auto_advance: ko.observable true
 		go: ->
-			keys = ['mode', 'key', 'measure', 'time', 'bpm', 'random_mode', 'auto_advance']
+			# keys = ['mode', 'key', 'measure', 'time', 'bpm', 'random_mode', 'auto_advance']
+			keys = (k for k of model when ko.isObservable model[k])
+			console.log keys
 			dict = ""
 			for k in keys
 				dict = "#{ dict }&#{ k }=" + encodeURI(model[k]())	
