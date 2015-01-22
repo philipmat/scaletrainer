@@ -26,9 +26,8 @@ for k in keys
 	model[k] = getParameterByName k
 	
 scale_in_key = S.scale model.key, model.mode
-console.log scale_in_key
-p = S.instrument_scale model.instrument, scale_in_key
-model.notes = S.random_notes p, 4
+instrument_scale = S.instrument_scale model.instrument, scale_in_key
+model.notes = ko.observableArray S.random_notes instrument_scale, 4
 
 console.log model
 ko.applyBindings model
