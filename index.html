@@ -27,7 +27,7 @@
 			<div>
 				<label for="mode">Mode</label>
 				<select id="mode" name="mode"
-					data-bind="options: modes, optionsValue: key, optionsText: value, value: mode">
+					data-bind="options: modes, optionsValue: 'key', optionsText: 'name', value: mode">
 					<option value="2212221">Major/Ionian</option>
 					<option value="2122122">Natural minor/Aeolian</option>
 					<option value="22323">Pentatonic major</option>
@@ -85,7 +85,7 @@
 			<div>
 				<label for="bpm">bpm</label>
 				<select id="bpm" name="bpm"
-					data-bind="options: bpms, optionsValue: key, optionsText: value, value: bpm">
+					data-bind="options: bpms, optionsValue: 'key', optionsText: 'name', value: bpm">
 					<option value="30">30 bmp</option>
 					<option value="40">40 bmp</option>
 					<option value="50">50 bmp</option>
@@ -104,7 +104,7 @@
 			<div>
 				<label for="randomness">Notes</label>
 				<select id="randomness" name="randomness"
-					data-bind="options: random_modes, optionsValue: name, optionsText: desc, value: random_mode">
+					data-bind="options: random_modes, optionsValue: 'name', optionsText: 'desc', value: random_mode">
 					<option value="all">All random</option>
 					<option value="random-first">Random first afterwards sequantial</option>
 					<option value="random-close">Random close</option>
@@ -117,15 +117,15 @@
 			</div>
 			<div>
 				<label for="autoadvance">
-					<input id="autoadvance" type="checkbox" name="autoadvance" /> Auto-advance when measure is done counting
+					<input id="autoadvance" type="checkbox" name="autoadvance" 
+						data-bind="checked: auto_advance"/> Auto-advance when measure is done counting
 				</label>
 			</div>
 			<button data-bind="click: go">Start!</button>
 		</form>
 	</div>
-<script type="text/javascript" src="scale.coffee"></script>
-<script type="text/javascript" src="index.coffee"></script>
-<script type="text/javascript" src="https://rawgit.com/jashkenas/coffeescript/master/extras/coffee-script.js"></script>
+<script type="text/coffeescript" src="scale.coffee"></script>
+<script type="text/coffeescript" src="index.coffee"></script>
 <!--script type="text/javascript" src="https://rawgit.com/jashkenas/coffeescript/master/extras/coffee-script.js"></script-->
 <script type="text/javascript" src="lib/coffee-script.js"></script>
 </body>
