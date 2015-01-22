@@ -19,23 +19,18 @@ $ = (id) ->
 	document.getElementById id
 
 S = window['scale']
-console.log S
-instrument = getParameterByName 'instrument'
-scale = getParameterByName 'mode'
-key = getParameterByName 'key'
-measures = getParameterByName 'measures'
 
-console.log "i=#{ instrument }, s=#{ scale }, k=#{ key }, ms=#{ measures }"
-scale_in_key = S.scale key, scale
+keys = ['instrument', 'mode', 'key', 'measures', 'time', 'bpm', 'randomness', 'autoadvance']
+model = {}
+for k in keys
+	model[k] = getParameterByName k
+	
+scale_in_key = S.scale model.key, model.mode
 console.log scale_in_key
-p = S.instrument_scale instrument, scale_in_key
-model = 
-	notes: S.random_notes p, 4
+p = S.instrument_scale model.instrument, scale_in_key
+model.notes = S.random_notes p, 4
 
-# p = S.instrument_scale 'Piano (88 keys)', S.scale 'C', 'Major/Ionian'
-# notes = S.random_notes p, 4
-# html_note = (S.print_note_html n for n in notes).join ' '
-# $('scale').innerHTML = html_note
+console.log model
 ko.applyBindings model
 </script>
 <!--script type="text/javascript" src="https://rawgit.com/jashkenas/coffeescript/master/extras/coffee-script.js"></script-->
