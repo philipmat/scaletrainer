@@ -19,9 +19,11 @@
 	</style>
 </head>
 <body>
-	
-<div id="scale-display" data-bind="foreach: notes">
-	<span class="octave-note"><span class="note" data-bind="text: note">(note)</span><span class="octave" data-bind="text: octave">(8ve)</span></span>
+<div style="display: none" data-bind="visible: loaded">
+	<p>&nbsp;</p>
+	<div id="scale-display" data-bind="foreach: notes">
+		<span class="octave-note"><span class="note" data-bind="text: note">(note)</span><span class="octave" data-bind="text: octave">(8ve)</span></span>
+	</div>
 </div>
 
 <script type="text/coffeescript" src="scale.coffee"></script>
@@ -46,8 +48,11 @@ instrument_scale = S.instrument_scale model.instrument, scale_in_key
 model.notes = ko.observableArray S.random_notes instrument_scale, model.number_of_notes
 
 console.log model
+model.loaded = true
 ko.applyBindings model
 
+move_next = () ->
+	window.location.reload()
 
 highlight = () ->
 	note = model.current_note + 1
@@ -55,6 +60,8 @@ highlight = () ->
 	if note >= model.number_of_notes
 		$class('octave-note')[model.number_of_notes-1].className = 'octave-note past'
 		window.clearInterval timer
+		if model.autoadvance == 'on'
+			move_next()
 		return
 	# clear previous
 	notes = $class('octave-note')
