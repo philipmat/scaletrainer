@@ -11,7 +11,7 @@
 		key: ko.observable()
 		measures: [1,2,3,4]
 		measure: ko.observable()
-		times: ['4/4']
+		times: ['4/4', '3/4', '2/4', '6/8']
 		time: ko.observable()
 		bpms: ({key: x, name: "#{ x * 10 } bpm"} for x in [30..150] by 10)
 		bpm: ko.observable()
