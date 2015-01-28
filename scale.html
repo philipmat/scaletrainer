@@ -2,10 +2,21 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title></title>
+	<title>Scale Trainer </title>
 	<!--script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.1.0/knockout-min.js"></script-->
 	<script type="text/javascript" src="lib/knockout-3.2.0.js"></script>
 	<script type="text/javascript" src="main.js"></script>
+	<style>
+	.octave-note {
+		border: 4px solid silver;
+		padding: 24px;
+		font-size: 2em;
+	}
+	.current { border: 4px solid green; }
+	.past { border: 4px solid blue; }
+
+
+	</style>
 </head>
 <body>
 	
@@ -15,8 +26,10 @@
 
 <script type="text/coffeescript" src="scale.coffee"></script>
 <script type="text/coffeescript">
-$ = (id) ->
+$id = (id) ->
 	document.getElementById id
+$class = (id) ->
+	Array.prototype.slice.call document.getElementsByClassName id
 
 S = window['scale']
 
@@ -25,12 +38,38 @@ model = {}
 for k in keys
 	model[k] = getParameterByName k
 	
+model.number_of_notes = 4
+model.note_time = 60 * 1000 / model.bpm
+model.current_note = 0
 scale_in_key = S.scale model.key, model.mode
 instrument_scale = S.instrument_scale model.instrument, scale_in_key
-model.notes = ko.observableArray S.random_notes instrument_scale, 4
+model.notes = ko.observableArray S.random_notes instrument_scale, model.number_of_notes
 
 console.log model
 ko.applyBindings model
+
+
+highlight = () ->
+	note = model.current_note + 1
+	console.log 'highlight', note, model.number_of_notes
+	if note >= model.number_of_notes
+		$class('octave-note')[model.number_of_notes-1].className = 'octave-note past'
+		window.clearInterval timer
+		return
+	# clear previous
+	notes = $class('octave-note')
+	for n, i in notes
+		if i < note
+			n.className = 'octave-note past'
+		if i == note
+			n.className = 'octave-note current'
+	
+	model.current_note = note
+	
+	
+model.current_note = -1
+timer = window.setInterval highlight, model.note_time
+
 </script>
 <!--script type="text/javascript" src="https://rawgit.com/jashkenas/coffeescript/master/extras/coffee-script.js"></script-->
 <script type="text/javascript" src="lib/coffee-script.js"></script>

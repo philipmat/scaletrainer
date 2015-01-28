@@ -13,7 +13,7 @@
 		measure: ko.observable()
 		times: ['4/4']
 		time: ko.observable()
-		bpms: ({key: x * 10, name: "#{ x * 10 } bpm"} for x in [30..150] by 10)
+		bpms: ({key: x, name: "#{ x * 10 } bpm"} for x in [30..150] by 10)
 		bpm: ko.observable()
 		random_modes: [ 
 			{ name: 'random_first', desc: 'Random first, afterwards sequential' }
