@@ -19,11 +19,12 @@
 	</style>
 </head>
 <body>
-<div style="display: none" data-bind="visible: loaded">
+<div style="display: none" data-bind="visible: $data">
 	<p>&nbsp;</p>
 	<div id="scale-display" data-bind="foreach: notes">
 		<span class="octave-note"><span class="note" data-bind="text: note">(note)</span><span class="octave" data-bind="text: octave">(8ve)</span></span>
 	</div>
+	<button data-bind="visible: next_visible, click: move_next">Next</button>
 </div>
 
 <script type="text/coffeescript" src="scale.coffee"></script>
@@ -36,13 +37,40 @@ $class = (id) ->
 S = window['scale']
 
 keys = ['instrument', 'mode', 'key', 'measures', 'time', 'bpm', 'randomness', 'autoadvance']
-model = {}
+model =
+	current_note: 0
+	next_visible: ko.observable(false)
+	move_next: () ->
+		window.location.reload()
+	advance: () ->
+		if model.autoadvance == 'on'
+			model.move_next()
+		else
+			model.next_visible(true)
+	highlight: () ->
+		note = model.current_note + 1
+		console.log 'highlight', note, model.number_of_notes
+		if note >= model.number_of_notes
+			$class('octave-note')[model.number_of_notes-1].className = 'octave-note past'
+			window.clearInterval timer
+			model.advance()
+			return
+		# clear previous
+		notes = $class('octave-note')
+		for n, i in notes
+			if i < note
+				n.className = 'octave-note past'
+			if i == note
+				n.className = 'octave-note current'
+		
+		model.current_note = note
+		
 for k in keys
 	model[k] = getParameterByName k
 	
 model.number_of_notes = 4
 model.note_time = 60 * 1000 / model.bpm
-model.current_note = 0
+
 scale_in_key = S.scale model.key, model.mode
 instrument_scale = S.instrument_scale model.instrument, scale_in_key
 model.notes = ko.observableArray S.random_notes instrument_scale, model.number_of_notes
@@ -50,32 +78,9 @@ model.notes = ko.observableArray S.random_notes instrument_scale, model.number_o
 console.log model
 model.loaded = true
 ko.applyBindings model
-
-move_next = () ->
-	window.location.reload()
-
-highlight = () ->
-	note = model.current_note + 1
-	console.log 'highlight', note, model.number_of_notes
-	if note >= model.number_of_notes
-		$class('octave-note')[model.number_of_notes-1].className = 'octave-note past'
-		window.clearInterval timer
-		if model.autoadvance == 'on'
-			move_next()
-		return
-	# clear previous
-	notes = $class('octave-note')
-	for n, i in notes
-		if i < note
-			n.className = 'octave-note past'
-		if i == note
-			n.className = 'octave-note current'
-	
-	model.current_note = note
-	
 	
 model.current_note = -1
-timer = window.setInterval highlight, model.note_time
+timer = window.setInterval model.highlight, model.note_time
 
 </script>
 <!--script type="text/javascript" src="https://rawgit.com/jashkenas/coffeescript/master/extras/coffee-script.js"></script-->
