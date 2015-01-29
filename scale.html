@@ -73,7 +73,7 @@ model =
 for k in keys
 	model[k] = getParameterByName k
 	
-model.number_of_notes = parseInt(model.time)
+model.number_of_notes = parseInt(model.time, 10) * parseInt(model.measures, 10)
 model.note_time = 60 * 1000 / model.bpm
 
 scale_in_key = S.scale model.key, model.mode
