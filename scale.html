@@ -9,11 +9,14 @@
 	<style>
 	.octave-note {
 		border: 4px solid silver;
+		color: silver;
+		margin: 2px;
 		padding: 24px;
 		font-size: 2em;
+		float: left;
 	}
-	.current { border: 4px solid green; }
-	.past { border: 4px solid blue; }
+	.current { border: 4px solid black; color: black; }
+	.past { color: dimgray; }
 
 
 	</style>
@@ -22,8 +25,10 @@
 <div style="display: none" data-bind="visible: $data">
 	<p>&nbsp;</p>
 	<div id="scale-display" data-bind="foreach: notes">
-		<span class="octave-note"><span class="note" data-bind="text: note">(note)</span><span class="octave" data-bind="text: octave">(8ve)</span></span>
+		<div class="octave-note"><span class="note" data-bind="text: note">(note)</span><span class="octave" data-bind="text: octave">(8ve)</span></div>
 	</div>
+	<hr style="clear: both" />
+	<a href="index.html">Back to setup</a>
 	<button data-bind="visible: next_visible, click: move_next">Next</button>
 </div>
 
