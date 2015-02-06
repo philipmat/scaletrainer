@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Scale Trainer </title>
+	<link rel="stylesheet" href="lib/css/pure-min.css">
 	<!--script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.1.0/knockout-min.js"></script-->
 	<script type="text/javascript" src="lib/knockout-3.2.0.js"></script>
 	<script type="text/javascript" src="main.js"></script>
@@ -17,19 +18,50 @@
 	}
 	.current { border: 4px solid black; color: black; }
 	.past { color: dimgray; }
+	.content { 
+		margin: 1em;
+	}
+        .button-success,
+        .button-error,
+        .button-warning,
+        .button-secondary {
+            color: white;
+            border-radius: 4px;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+        }
 
+        .button-success {
+            background: rgb(28, 184, 65); /* this is a green */
+        }
 
+        .button-error {
+            background: rgb(202, 60, 60); /* this is a maroon */
+        }
+
+        .button-warning {
+            background: rgb(223, 117, 20); /* this is an orange */
+        }
+
+        .button-secondary {
+            background: rgb(66, 184, 221); /* this is a light blue */
+        }
 	</style>
 </head>
 <body>
-<div style="display: none" data-bind="visible: $data">
-	<p>&nbsp;</p>
-	<div id="scale-display" data-bind="foreach: notes">
-		<div class="octave-note"><span class="note" data-bind="text: note">(note)</span><span class="octave" data-bind="text: octave">(8ve)</span></div>
+<div class="content">
+	<div style="display: none" data-bind="visible: $data">
+		<p>&nbsp;</p>
+		<div id="scale-display" data-bind="foreach: notes">
+			<div class="octave-note"><span class="note" data-bind="text: note">(note)</span><span class="octave" data-bind="text: octave">(8ve)</span></div>
+		</div>
+		<hr style="clear: both" />
+		<a href="index.html" class="pure-button">Back to setup</a>
+		<span data-bind="visible: next_visible">
+			&nbsp;|&nbsp;
+			<button data-bind="click: move_next"
+				class="pure-button button-success">Next</button>
+		</span>
 	</div>
-	<hr style="clear: both" />
-	<a href="index.html">Back to setup</a>
-	<button data-bind="visible: next_visible, click: move_next">Next</button>
 </div>
 
 <script type="text/coffeescript" src="scale.coffee"></script>
