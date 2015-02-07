@@ -69,7 +69,7 @@
 			</div>
 			<div class="pure-control-group">
 				<label for="measures">Measures</label>
-				<select id="measures" name="measures"
+				<select id="measure" name="measure"
 					data-bind="options: measures, value: measure">
 					<option value="1">1</option>
 					<option value="2">2</option>
@@ -111,7 +111,7 @@
 			<div class="pure-control-group">
 				<label for="randomness">Notes</label>
 				<select id="randomness" name="randomness"
-					data-bind="options: random_modes, optionsValue: 'name', optionsText: 'desc', value: random_mode">
+					data-bind="options: random_modes, optionsValue: 'name', optionsText: 'desc', value: randomness">
 					<option value="all">All random</option>
 					<option value="random-first">Random first afterwards sequantial</option>
 					<option value="random-close">Random close</option>
@@ -125,13 +125,14 @@
 			<div class="pure-controls">
 				<label for="autoadvance" class="pure-checkbox">
 					<input id="autoadvance" type="checkbox" name="autoadvance" 
-						data-bind="checked: auto_advance"/> Auto-advance when measure is done counting
+						data-bind="checked: autoadvance"/> Auto-advance when measure is done counting
 				</label>
 			</div>
 
 			<div class="pure-controls">
 				<input type="submit" value="Start!" 
 				   	   class="pure-button pure-button-primary"/>
+					   <button class="pure-button" data-bind="click: clear">Clear</button>
 			</div>
 			</fieldset>
 		</form>

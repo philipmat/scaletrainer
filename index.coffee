@@ -21,8 +21,8 @@
 			{ name: 'random_two_octaves', desc: 'Random, sparser (within two 8ve}' }
 			{ name: 'random_notes', desc: 'All random' }
 		]
-		random_mode: ko.observable()
-		auto_advance: ko.observable true
+		randomness: ko.observable()
+		autoadvance: ko.observable true
 		go: ->
 			keys = (k for k of model when ko.isObservable model[k])
 			console.log keys
@@ -30,6 +30,18 @@
 			for k in keys
 				dict = "#{ dict }&#{ k }=" + encodeURI(model[k]())	
 			window.location = "scale.html?#{ dict }"
+			
 
+	model.clear = ->
+			window.localStorage?.removeItem 'scaletrainer.values'
+			for k, v of model
+				if ko.isObservable model[k]
+					model[k](null)
+
+	prev = window.localStorage?.getItem 'scaletrainer.values'
+	if prev
+		prevObject = JSON.parse prev
+		for k, v of prevObject 
+			model[k]?(v)
 	ko.applyBindings(model)
 )(this, ko)

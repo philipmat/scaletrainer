@@ -74,7 +74,7 @@ $class = (id) ->
 
 S = window['scale']
 
-keys = ['instrument', 'mode', 'key', 'measures', 'time', 'bpm', 'randomness', 'autoadvance']
+keys = ['instrument', 'mode', 'key', 'measure', 'time', 'bpm', 'randomness', 'autoadvance']
 model =
 	current_note: 0
 	next_visible: ko.observable(false)
@@ -106,7 +106,7 @@ model =
 for k in keys
 	model[k] = getParameterByName k
 	
-model.number_of_notes = parseInt(model.time, 10) * parseInt(model.measures, 10)
+model.number_of_notes = parseInt(model.time, 10) * parseInt(model.measure, 10)
 model.note_time = 60 * 1000 / model.bpm
 
 scale_in_key = S.scale model.key, model.mode
@@ -116,6 +116,7 @@ model.notes = ko.observableArray model.random_function(instrument_scale, model.n
 
 console.log model
 model.loaded = true
+window.localStorage?.setItem 'scaletrainer.values', JSON.stringify model
 ko.applyBindings model
 	
 model.current_note = -1
